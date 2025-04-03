@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Electrolyte Correction Calculator</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="images/logo_icons.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,100;1,300;1,400&display=swap"
+    />
+
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #e4e4e4;
+        color: #333;
+        min-height: 100vh;
+        width: 100%;
+      }
+      table {
+        margin: 0 15px !important;
+        margin-bottom: 30px !important;
+        text-align: center;
+
+        /* max-width: 80%; */
+      }
+
+      .table td {
+        vertical-align: middle;
+        text-align: center;
+        padding: 3px 10px;
+      }
+
+      .table-bordered td,
+      .table-bordered th {
+        border: 1px solid #dee2e6;
+        color: #000;
+      }
+
+      td {
+        background-color: #fff;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      select {
+        border: 1px solid #8b8b8b;
+        border-radius: 5px;
+        margin: 3px 0;
+        min-width: 170px !important;
+        padding-left: 5px;
+      }
+      /* input {
+        width: 170px;
+      } */
+      /* .upper_text {
+        width: 75%;
+      } */
+
+      @media (max-width: 542px) {
+        .table td {
+          padding: 3px;
+        }
+
+        /* .upper_text {
+          width: 90%;
+        } */
+
+        input,
+        select {
+          width: 100px !important;
+        }
+      }
+
+      body::-webkit-scrollbar {
+        width: 10px !important;
+      }
+
+      /* تغيير لون ومظهر المقبض (thumb) */
+      body::-webkit-scrollbar-thumb {
+        background-color: rgba(59, 59, 59, 0.58) !important;
+        border-radius: 50px !important;
+      }
+
+      /* تغيير لون المسار (track) */
+      body::-webkit-scrollbar-track {
+        background-color: rgb(161, 161, 161) !important;
+        border-radius: 50px !important;
+      }
+      /* تخصيص شريط التمرير */
+      body::-webkit-scrollbar {
+        width: 10px !important;
+      }
+      body::-webkit-scrollbar-thumb {
+        background-color: rgba(59, 59, 59, 0.58) !important;
+        border-radius: 50px !important;
+      }
+      body::-webkit-scrollbar-track {
+        background-color: rgb(209, 208, 208) !important;
+        border-radius: 50px !important;
+      }
+
+      /* Text meant only for screen readers. */
+      .screen-reader-text {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        word-wrap: normal !important;
+      }
+
+      .screen-reader-text:focus {
+        background-color: #eee;
+        clip: auto !important;
+        clip-path: none;
+        color: #444;
+        display: block;
+        font-size: 1em;
+        height: auto;
+        left: 5px;
+        line-height: normal;
+        padding: 15px 23px 14px;
+        text-decoration: none;
+        top: 5px;
+        width: auto;
+        z-index: 100000; /* Above WP toolbar. */
+      }
+      .visually-hidden {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0;
+        margin: -1px;
+        border: 0;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      /*-----------------------------------------------------------------
+	NAVIGATION
+-------------------------------------------------------------------*/
+
+      .search:focus {
+        border: 1px solid #000;
+      }
+
+      .logo-box {
+        margin-right: 15%;
+        text-align: left;
+      }
+
+      .menu-button,
+      .menu-button:hover,
+      .menu-button:active,
+      .menu-button:focus {
+        padding: 0;
+        background-color: transparent !important;
+        color: #5ca2df !important;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .menu-button:focus {
+        outline: 1px dotted #ff911a;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .menu > li > a {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      /*For sticky Menu*/
+      .navbar-fixed .menu > li > a {
+        font-size: 16px;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .navbar-brand,
+      .sticky-navbar-brand {
+        float: left;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .menu .menu-item-has-children .sub-menu > li > a {
+        letter-spacing: 0.09rem;
+        color: #bbb;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        font-weight: 400 !important;
+        transition: all 0.3s ease;
+      }
+
+      li.nav-item a:hover {
+        color: #5ca2df;
+      }
+
+      .site-menu-content {
+        /* word-break: break-word; */
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+
+      .navbar-overlap {
+        background-color: rgba(0, 0, 0, 0);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      .site-title,
+      .site-description {
+        color: #fff;
+      }
+
+      .navbar-overlap .site-title a:hover {
+        color: #5ca2df;
+      }
+
+      .main-navigation .menu > li > a {
+        color: #fff;
+      }
+      .main-navigation .menu > li > a:hover {
+        color: #5ca2df;
+      }
+
+      .navbar-overlap
+        .main-navigation
+        .menu
+        > li
+        .sub-menu
+        > li.current-menu-ancestor
+        > a,
+      .navbar-overlap
+        .main-navigation
+        .menu
+        > li
+        .sub-menu
+        > li.current-menu-parent
+        > a,
+      .navbar-overlap
+        .main-navigation
+        .menu
+        > li
+        .sub-menu
+        > li.current-menu-item
+        > a,
+      .navbar-overlap .main-navigation .menu .current-menu-ancestor > a,
+      .navbar-overlap .main-navigation .menu .current-menu-parent > a,
+      .navbar-overlap .main-navigation .menu .current-menu-item > a,
+      .navbar-overlap .main-navigation .menu > li > a:hover {
+        color: #5ca2df;
+      }
+
+      .site-menu-content--sticky.sticky-menu {
+        position: fixed;
+        top: 0;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+        transform: translateY(-200px);
+        -webkit-transform: translateY(-200px);
+        -moz-transform: translateY(-200px);
+        -ms-transform: translateY(-200px);
+        -o-transform: translateY(-200px);
+      }
+
+      .site-menu-content--sticky.sticky-menu-in-view {
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        padding: 0 21%;
+      }
+
+      .site-menu-content__wrap {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        position: relative;
+        min-height: 8vh;
+        padding: 10px 0;
+        z-index: 9999;
+      }
+      /*If Menu Sticky */
+      .navbar-fixed .site-menu-content__wrap {
+        padding: 1px 0;
+      }
+
+      .site-menu-content__wrap .site-link {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .site-title,
+      .site-description {
+        margin: 0;
+      }
+
+      .site-title {
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-left: 0px !important;
+        height: auto;
+        padding: 0px;
+        float: none;
+      }
+
+      .site-description {
+        /* font-size: 1rem; */
+        line-height: 1.3;
+        padding-left: 5px;
+      }
+
+      @media (min-width: 767px) and (max-width: 1024px) {
+        .site-title {
+          line-height: 1.25;
+        }
+        .site-description {
+          line-height: 1.35;
+        }
+        .navbar-brand {
+          padding: 55px 10px;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        .site-menu-content__wrap {
+          padding: 0;
+        }
+        .site-branding-text .site-title,
+        .site-title {
+          font-size: 1rem;
+        }
+
+        .site-description {
+          font-size: 0.6rem;
+        }
+
+        .site-description {
+          padding: 2px;
+        }
+        .navbar-brand {
+          padding: 55px 5px;
+        }
+        .site-branding .custom-logo-link,
+        .site-branding__title-wrap {
+          margin-right: 0;
+        }
+      }
+      @media (min-width: 992px) {
+        .navbar-brand {
+          padding: 20px 0px;
+        }
+      }
+
+      .site-branding {
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+        flex-grow: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        max-width: 81%;
+        margin-right: 0;
+        word-break: break-word;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+      }
+
+      @media screen and (max-width: 767px) {
+        .site-branding {
+          max-width: 69%;
+          -ms-flex-preferred-size: 35%;
+        }
+      }
+
+      @media screen and (min-width: 767px) {
+        .site-branding {
+          max-width: 35%;
+          -ms-flex-preferred-size: 35%;
+        }
+      }
+
+      .site-branding .custom-logo-link/* ,
+.site-branding__title-wrap */ {
+        /* margin-right: .45rem; */
+        width: 45%;
+      }
+
+      .site-branding .custom-logo-link img {
+        display: block;
+        max-height: 52px;
+        max-width: 100px;
+        width: auto;
+        height: auto;
+      }
+
+      @media screen and (min-width: 767px) {
+        .site-branding .custom-logo-link img {
+          max-width: 215px;
+        }
+      }
+
+      .site-branding__title-wrap {
+        -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+      }
+
+      .main-navigation {
+        -webkit-box-flex: -1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        text-align: right;
+        margin: 0;
+      }
+      @media (max-width: 767px) {
+        .main-navigation {
+          display: flex;
+          justify-content: space-evenly; /* يجعل القائمة تظهر في أقصى اليمين */
+          align-items: center; /* يضمن أن العناصر تكون في وسط العمودي */
+          margin-left: auto; /* يدفع القائمة إلى اليمين */
+        }
+
+        .main-navigation .menu {
+          display: flex;
+          justify-content: space-evenly; /* يجعل عناصر القائمة تظهر في أقصى اليمين */
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation {
+          display: flex;
+          justify-content: flex-end; /* يجعل القائمة تظهر في أقصى اليمين */
+          align-items: center; /* يضمن أن العناصر تكون في وسط العمودي */
+          margin-left: auto; /* يدفع القائمة إلى اليمين */
+        }
+
+        .main-navigation .menu {
+          display: flex;
+          justify-content: flex-end; /* يجعل عناصر القائمة تظهر في أقصى اليمين */
+          margin: 0;
+          padding: 0;
+        }
+
+        .main-navigation .menu > li {
+          margin-left: 20px; /* يضيف مسافة بين عناصر القائمة */
+        }
+      }
+
+      @media only screen and (max-width: 786px) {
+        .main-navigation > .primary-menu-container {
+          display: none;
+        }
+      }
+
+      .main-navigation > .primary-menu-container {
+        position: absolute;
+        float: right;
+        right: 0;
+        top: 81px;
+        max-width: 380px;
+        width: 350px;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2),
+          -1px -1px 4px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transition: transform 0.3s ease-out;
+        -webkit-transition: transform 0.3s ease-out;
+        -moz-transition: transform 0.3s ease-out;
+        -ms-transition: transform 0.3s ease-out;
+        -o-transition: transform 0.3s ease-out;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation > .primary-menu-container {
+          overflow-x: visible;
+        }
+      }
+
+      .main-navigation .menu > li,
+      .main-navigation .menu > li > a {
+        display: block;
+      }
+
+      .main-navigation .menu > li {
+        padding: 0 1rem 0 2.5rem;
+        margin-left: 0;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.4;
+        transition: all 0.3s ease;
+      }
+
+      .main-navigation .menu > li:not(:last-child) > a {
+        border-bottom: 1px solid #8b8e93;
+      }
+
+      .main-navigation .menu > li:not(.menu-item-has-children) > a {
+        padding: 0.75rem 0;
+      }
+
+      .main-navigation .menu > li.menu-item-has-children > a {
+        padding: 0.75rem 0 1em 1.25em;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation .menu > li:not(.menu-item-has-children) > a,
+        .main-navigation .menu > li.menu-item-has-children > a {
+          padding: 0;
+        }
+      }
+
+      .main-navigation .menu > li:first-child > a {
+        padding-top: 1rem;
+      }
+
+      .main-navigation .menu > li:last-child > a {
+        margin-bottom: 1rem;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation > .primary-menu-container {
+          position: static;
+          max-width: 100%;
+          width: auto;
+          height: auto;
+          overflow-y: visible;
+          background-color: transparent;
+          box-shadow: none;
+          transform: translateX(0);
+          -webkit-transform: translateX(0);
+          -moz-transform: translateX(0);
+          -ms-transform: translateX(0);
+          -o-transform: translateX(0);
+        }
+        .main-navigation .menu > li {
+          display: inline-block;
+          padding: 32px 20px;
+        }
+        .main-navigation .menu > li > a {
+          display: inline;
+          padding: 0;
+        }
+        .main-navigation .menu > li:not(:last-child) > a {
+          border-bottom: 0;
+        }
+        .main-navigation .menu > li:first-child > a {
+          padding-top: 0;
+        }
+        .main-navigation .menu > li:last-child > a {
+          padding-bottom: 0;
+        }
+      }
+
+      @media only screen and (max-width: 786px) {
+        .main-navigation > .primary-menu-container--open {
+          display: block;
+        }
+      }
+
+      .main-navigation > .primary-menu-container--open {
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation > .primary-menu-container {
+          position: static;
+          width: auto;
+          background-color: transparent;
+          transform: translateX(0);
+          -webkit-transform: translateX(0);
+          -moz-transform: translateX(0);
+          -ms-transform: translateX(0);
+          -o-transform: translateX(0);
+        }
+      }
+
+      .main-navigation .menu {
+        padding: 0;
+        margin: 0;
+      }
+
+      .main-navigation li {
+        list-style-type: none;
+        position: relative;
+      }
+
+      .main-navigation .menu > li .sub-menu > li.current-menu-ancestor > a,
+      .main-navigation .menu > li .sub-menu > li.current-menu-parent > a,
+      .main-navigation .menu > li .sub-menu > li.current-menu-item > a,
+      .main-navigation .menu .current-menu-ancestor > a,
+      .main-navigation .menu .current-menu-parent > a,
+      .main-navigation .menu .current-menu-item > a,
+      .main-navigation .menu > li > a:hover {
+        color: #5ca2df;
+      }
+
+      .main-navigation .menu > li .sub-menu {
+        font-size: 0.95rem;
+        text-align: left;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        z-index: 9999;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation .menu > li .sub-menu {
+          position: absolute;
+          width: 225px;
+        }
+      }
+
+      .main-navigation .menu > li > .sub-menu {
+        background: rgba(32, 32, 32, 1);
+        top: 85px;
+        left: 113px;
+        box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.12),
+          0 3px 12px 0 rgba(0, 0, 0, 0.12);
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+      }
+
+      .main-navigation .menu > li.menu-item-has-children > .sub-menu,
+      .main-navigation .sub-menu > li.menu-item-has-children > .sub-menu {
+        display: block;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.15s ease-in;
+        -webkit-transition: all 0.15s ease-in;
+        -moz-transition: all 0.15s ease-in;
+        -ms-transition: all 0.15s ease-in;
+        -o-transition: all 0.15s ease-in;
+      }
+
+      .main-navigation .menu > li.menu-item-has-children > .sub-menu--open,
+      .main-navigation .sub-menu > li.menu-item-has-children > .sub-menu--open {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation .menu > li.menu-item-has-children:hover > .sub-menu,
+        .main-navigation
+          .sub-menu
+          > li.menu-item-has-children:hover
+          > .sub-menu {
+          opacity: 1;
+          height: auto;
+          overflow: visible;
+        }
+      }
+
+      .main-navigation .menu > li .sub-menu > li,
+      .main-navigation .menu > li .sub-menu > li > a {
+        display: block;
+      }
+
+      .main-navigation .menu > li .sub-menu > li:not(:last-of-type) > a {
+        border-bottom: 1px solid rgba(73, 71, 71, 0.3);
+      }
+
+      .main-navigation .menu > li .sub-menu > li:not(.menu-item-has-children) {
+        padding: 0 1rem;
+      }
+
+      .main-navigation .menu > li .sub-menu > li.menu-item-has-children {
+        padding: 0 2.5rem 0 1rem;
+      }
+
+      .main-navigation .menu > li .sub-menu > li > a {
+        padding: 1.25em 0 1em 0.75rem;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation .menu > li .sub-menu > li:not(.menu-item-has-children),
+        .main-navigation .menu > li .sub-menu > li.menu-item-has-children {
+          padding: 0 15px;
+        }
+        .main-navigation .menu > li .sub-menu > li > a {
+          padding: 12px 0px;
+        }
+      }
+
+      .main-navigation .menu > li .sub-menu > li > a:hover {
+        color: #5ca2df;
+      }
+
+      .main-navigation .sub-menu li > .sub-menu {
+        background: rgba(32, 32, 32, 1);
+        left: 0;
+        top: 100%;
+        border-top: 1px solid #eee;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3),
+          -1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation .sub-menu li > .sub-menu {
+          background: rgba(32, 32, 32, 1);
+          left: -99%;
+          top: 5px;
+          border-top: 0;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4),
+            -1px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+        .main-navigation .sub-menu li > .sub-menu li > .sub-menu {
+          background: rgba(32, 32, 32, 1);
+          left: -99%;
+          top: 10px;
+          border-top: 0;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4),
+            -1px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .menu-toggle {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        cursor: pointer;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .main-navigation__icon {
+        display: block;
+        width: 22px;
+        height: 22px;
+      }
+
+      @media screen and (min-width: 767px) {
+        .menu-toggle {
+          display: none;
+        }
+      }
+
+      .menu-toggle > * {
+        pointer-events: none;
+      }
+
+      .main-navigation__icon__middle {
+        top: 9px;
+        left: 0;
+        opacity: 1;
+        transform-origin: 0 50%;
+      }
+
+      .menu-toggle--open .main-navigation__icon::before {
+        transform: rotate(45deg) scaleX(1.25);
+        -webkit-transform: rotate(45deg) scaleX(1.25);
+        -moz-transform: rotate(45deg) scaleX(1.25);
+        -ms-transform: rotate(45deg) scaleX(1.25);
+        -o-transform: rotate(45deg) scaleX(1.25);
+      }
+
+      .menu-toggle--open .main-navigation__icon .main-navigation__icon__middle {
+        opacity: 0;
+        transform: scaleX(0);
+        -webkit-transform: scaleX(0);
+        -moz-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        -o-transform: scaleX(0);
+      }
+
+      .menu-toggle--open .main-navigation__icon::after {
+        transform: rotate(-45deg) scaleX(1.25);
+        -webkit-transform: rotate(-45deg) scaleX(1.25);
+        -moz-transform: rotate(-45deg) scaleX(1.25);
+        -ms-transform: rotate(-45deg) scaleX(1.25);
+        -o-transform: rotate(-45deg) scaleX(1.25);
+      }
+
+      /* Mobile Menu */
+      @media (min-width: 767px) {
+        .open-nav-btn {
+          display: none;
+        }
+        .close-btn {
+          display: none;
+        }
+        .main-navigation__icon {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        button:hover,
+        button:focus {
+          background-color: transparent !important;
+        }
+
+        .navbar-overlap .main-navigation .menu > li > a {
+          color: #000;
+        }
+
+        .main-navigation .menu > li > .sub-menu {
+          background: rgba(32, 32, 32, 1);
+          top: 0px;
+          left: 122px;
+          box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.12),
+            0 3px 12px 0 rgba(0, 0, 0, 0.12);
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -moz-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          -o-transform: translateX(-50%);
+        }
+
+        button.open-nav-btn {
+          font-size: 1.5rem;
+          background-color: transparent;
+          color: #5ca2df;
+          outline: 0;
+          padding: 5px 10px;
+          border-radius: 5px;
+          border: 2px solid #5ca2df;
+          border-color: #5ca2df;
+        }
+
+        button.open-nav-btn i {
+          padding: 8px;
+          border-radius: 5px;
+          border: 2px solid #5ca2df;
+        }
+
+        .slide-content {
+          height: 100%;
+          width: 0;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          right: 0;
+          background-color: #fff;
+          overflow-x: hidden;
+          transition: width 0.5s;
+          padding-top: 100px;
+          visibility: hidden;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2),
+            -1px -1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content a:focus,
+        .slide-content button:focus {
+          outline: 2px solid orange;
+        }
+
+        main a:focus,
+        .open-nav-btn:focus {
+          outline: 2px solid orange;
+          outline-offset: -18px;
+        }
+
+        .close-btn {
+          font-size: 15px;
+          color: #f5f5f5;
+          border-radius: 10px;
+          padding: 5px 10px;
+          border-color: #5ca2df;
+          outline: 0;
+          background-color: transparent;
+        }
+
+        .slide-content a:hover,
+        .slide-content a:focus {
+          text-decoration: underline;
+        }
+
+        .slide-content .close-btn i {
+          padding: 10px;
+          border-radius: 5px;
+          border: 2px solid #5ca2df;
+        }
+
+        .slide-content .close-btn {
+          position: absolute;
+          top: 65px;
+          right: 5px;
+          color: #5ca2df;
+          border-radius: 5px;
+        }
+
+        .visible {
+          visibility: visible;
+        }
+
+        .active {
+          width: 300px;
+        }
+
+        main {
+          padding: 0 10%;
+        }
+      }
+
+      /*--------------------------------------------------------------
+### Submenu arrow: start
+--------------------------------------------------------------*/
+      .dropdown-icon:after {
+        color: #fff;
+        display: block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 14px;
+        content: "\f107";
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .main-navigation .menu > li.menu-item-has-children,
+      .main-navigation .menu .sub-menu li.menu-item-has-children {
+        position: relative;
+      }
+
+      .main-navigation
+        .menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button {
+        position: absolute;
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px;
+      }
+      /* .main-navigation .menu li.menu-item-has-children>a+.menu-arrow-button:hover {
+	color: #fff;
+} */
+
+      .main-navigation
+        .menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button
+        > * {
+        pointer-events: none;
+      }
+
+      .main-navigation
+        .menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button
+        .svg-icon {
+        display: inline-block;
+      }
+
+      .main-navigation
+        .menu
+        > li.menu-item-has-children
+        > a
+        + .menu-arrow-button
+        .svg-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .main-navigation
+        .menu
+        .sub-menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button
+        .svg-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      #primary-menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button.sub-menu-show {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+      }
+
+      @media screen and (min-width: 767px) {
+        #primary-menu
+          > li.menu-item-has-children
+          > a
+          + .menu-arrow-button.sub-menu-show {
+          transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+        }
+        #primary-menu
+          .sub-menu
+          li.menu-item-has-children
+          > a
+          + .menu-arrow-button.sub-menu-show {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+        }
+      }
+
+      .main-navigation
+        .menu
+        > li.menu-item-has-children
+        > a
+        + .menu-arrow-button {
+        top: 0.65rem;
+        left: 0.5rem;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation
+          .menu
+          > li.menu-item-has-children
+          > a
+          + .menu-arrow-button {
+          top: 32px;
+          left: auto;
+          right: -5px;
+          transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+        }
+      }
+
+      .main-navigation
+        .menu
+        .sub-menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button {
+        right: 12px;
+        display: inline-block;
+        transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+      }
+
+      .main-navigation
+        .menu
+        .sub-menu
+        li.menu-item-has-children
+        > a
+        + .menu-arrow-button {
+        top: 0.88rem;
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation
+          .menu
+          .sub-menu
+          li.menu-item-has-children
+          > a
+          + .menu-arrow-button {
+          top: 14%;
+        }
+        .main-navigation
+          .menu
+          .sub-menu
+          li.menu-item-has-children:last-child
+          > a
+          + .menu-arrow-button {
+          top: 20%;
+        }
+        .main-navigation
+          .menu
+          .sub-menu
+          li.menu-item-has-children:first-child
+          > a
+          + .menu-arrow-button {
+          top: 24%;
+        }
+      }
+
+      /*--------------------------------------------------------------
+##  Submenu arrow: end
+--------------------------------------------------------------*/
+      .site-cart-account {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        -ms-flex-preferred-size: 20%;
+        flex-basis: 20%;
+      }
+
+      .site-cart {
+        -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+        order: 2;
+      }
+
+      .site-account-links {
+        -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+        order: 1;
+        font-size: 0.85em;
+        margin: 1rem 0 0 0;
+        padding: 0;
+      }
+
+      .site-cart {
+        font-size: 0.95em;
+        margin-top: 1rem;
+        margin-right: 0.7rem;
+      }
+
+      .site-account-links li {
+        display: inline-block;
+      }
+
+      .site-account-links li:first-child {
+        margin-left: 0.7rem;
+      }
+
+      .site-account-links li:not(:first-child) {
+        margin-left: 1rem;
+      }
+      @media screen and (max-width: 530px) {
+        .swiper-slide h1 {
+          margin-top: 30px;
+          font-size: 30px;
+        }
+        .swiper-slide .main_slide_center p {
+          display: none;
+        }
+        .swiper-slide a {
+          display: none;
+        }
+      }
+
+      @media screen and (min-width: 530px) {
+        .main-navigation {
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+        .main-navigation > .primary-menu-container {
+          right: -155px;
+        }
+        .site-cart-account {
+          display: block;
+          -ms-flex-preferred-size: 80%;
+          flex-basis: 80%;
+        }
+        .site-cart {
+          text-align: right;
+          margin-top: 0;
+          margin-right: 0;
+          padding-top: 0.4rem;
+        }
+        .site-account-links {
+          margin-top: 0.3em;
+        }
+        .site-account-links li:first-child {
+          margin-left: 0;
+        }
+      }
+
+      @media screen and (min-width: 767px) {
+        .main-navigation {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: end;
+          -ms-flex-pack: end;
+          justify-content: flex-end;
+        }
+        .site-cart-account {
+          -ms-flex-preferred-size: 24%;
+          flex-basis: 24%;
+        }
+        .site-cart {
+          text-align: center;
+        }
+      }
+
+      /*--------------------------------------------------------------*/
+      /*	Menubar Overlap & Fixed
+/*--------------------------------------------------------------*/
+
+      .navbar-overlap {
+        background-color: rgba(0, 0, 0, 0);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      .navbar-fixed {
+        background-color: rgba(0, 0, 0, 0.85);
+        box-shadow: rgba(0, 0, 0, 0.26) 0 3px 5px;
+        position: fixed;
+        top: 0px;
+        right: 0;
+        left: 0;
+        min-height: 40px;
+        z-index: 2;
+        animation: slide-down 1.07s;
+      }
+
+      a {
+        text-decoration: none !important;
+      }
+
+      .site-menu-content {
+        background-color: rgba(0, 0, 0, 0.88);
+        box-shadow: rgba(0, 0, 0, 0.117647) 0 3px 5px;
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        top: 0;
+        left: 0;
+        letter-spacing: 1px !important;
+        transition: background-color 0.3s ease; /* إضافة انتقال سلس لتغيير الخلفية */
+        /* height: 140px; */
+      }
+
+      /* .site-menu-content__wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding: 10px 20px; 
+      } */
+
+      .site-branding .custom-logo-link img {
+        max-height: 50px; /* تعديل ارتفاع الشعار حسب الحاجة */
+        width: auto;
+      }
+
+      .main-navigation .menu > li > a {
+        color: #fff; /* لون النص الأبيض */
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 15px; /* تعديل الحشو حسب الحاجة */
+      }
+
+      .main-navigation .menu > li > a:hover {
+        color: #5ca2df; /* لون النص عند التمرير */
+      }
+
+      .main-navigation .sub-menu {
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.9
+        ) !important; /* خلفية سوداء شفافة للقوائم الفرعية */
+        border: none;
+      }
+
+      .main-navigation .sub-menu > li > a {
+        color: #bbb; /* لون النص للقوائم الفرعية */
+        padding: 10px 20px;
+      }
+
+      .main-navigation .sub-menu > li > a:hover {
+        color: #5ca2df; /* لون النص عند التمرير للقوائم الفرعية */
+      }
+
+      /* تعديلات للهاتف المحمول */
+      @media screen and (max-width: 767px) {
+        .site-menu-content {
+          height: 180px;
+        }
+        .site-menu-content__wrap {
+          padding: 10px;
+        }
+
+        .main-navigation .menu > li > a {
+          padding: 10px;
+        }
+
+        .main-navigation .sub-menu > li > a {
+          padding: 10px 30px;
+          color: #929292 !important;
+        }
+
+        .main-navigation .sub-menu {
+          display: none; /* إخفاء القوائم الفرعية بشكل افتراضي */
+        }
+
+        .main-navigation .sub-menu.sub-menu--open {
+          display: block; /* إظهار القوائم الفرعية عند النقر على السهم */
+        }
+
+        .main-navigation .menu-arrow-button {
+          display: inline-block; /* إظهار السهم */
+          cursor: pointer;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        .slide-content {
+          height: 400px;
+          width: 0;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          right: 0;
+          background-color: #fff;
+          overflow-x: hidden;
+          transition: width 0.5s;
+          padding-top: 100px;
+          visibility: hidden;
+          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2),
+            -1px -1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content li,
+        .slide-content a {
+          color: #000 !important;
+        }
+
+        .slide-content li:hover,
+        .slide-content a:hover {
+          color: #5ca2df !important;
+          text-decoration: underline;
+        }
+
+        .active {
+          width: 300px;
+          visibility: visible;
+        }
+      }
+
+      .site-menu-content {
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.117647); /* إضافة ظل */
+      }
+
+      .site-menu-content.scrolled {
+        background-color: rgba(0, 0, 0, 0.88);
+        box-shadow: rgba(0, 0, 0, 0.117647) 0 3px 5px;
+      }
+
+      .background {
+        height: 450px;
+        width: 100%;
+        background-image: url(images/background.jpeg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative; /* لجعل الـ overlay يظهر داخل الـ div */
+      }
+
+      .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* اللون الأسود مع 50% شفافية */
+      }
+
+      footer {
+        height: 450px;
+        width: 100%;
+        background-image: url(images/background.jpeg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative; /* لجعل الـ overlay يظهر داخل الـ div */
+      }
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(
+          3,
+          15,
+          27,
+          0.705
+        ); /* لون أزرق فاتح مع 60% شفافية */
+      }
+
+      .site-footer {
+        background-color: transparent;
+        position: relative;
+        padding-top: 5rem;
+        padding-bottom: 1.875rem;
+      }
+
+      @media (max-width: 992px) {
+        .site-footer {
+          padding-top: 350px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .site-footer {
+          padding-top: 80px;
+        }
+      }
+
+      .site-footer .widget .widget-title {
+        color: #ffffff;
+        margin: 0 0 10px;
+        padding: 0.25rem 0px 0.25rem 0.625rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        word-wrap: break-word;
+        color: #ffffff;
+        margin: 0 0 10px;
+        font-weight: 600;
+        word-wrap: break-word;
+        background: linear-gradient(to right, #5ca2df47, #192127);
+        background: -webkit-linear-gradient(to right, #5ca2df47, #192127);
+      }
+      .widget .widget-title {
+        border-left: 3px solid #5ca2df;
+      }
+
+      .widget .widget-title {
+        color: #202020;
+        font-weight: 700;
+        margin: 0 0 30px;
+        padding: 5px 0 5px 15px;
+      }
+
+      h4 {
+        font-family: Montserrat Alternates !important;
+      }
+
+      .site-info {
+        padding: 30px 0;
+        font-size: 0.938rem;
+        text-align: center;
+        color: #fff;
+        background: #010e1b;
+        width: 100%;
+      }
+
+      .site-menu-content__wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        position: sticky; /* جعل العنصر يثبت عند التمرير */
+        top: 0; /* التثبيت في أعلى الصفحة */
+        z-index: 1000; /* التأكد من أن القائمة تظهر فوق العناصر الأخرى */
+        flex-wrap: wrap;
+        transition: background-color 0.3s ease; /* انتقال سلس لتغيير الخلفية */
+      }
+
+      .site-menu-content__wrap.scrolled {
+        background-color: rgba(0, 0, 0, 0.88); /* لون الخلفية عند التمرير */
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.117647); /* إضافة ظل */
+      }
+
+      @media screen and (max-width: 1300px) {
+        .site-menu-content__wrap {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          flex-wrap: wrap; /* يسمح للعناصر بالانتقال إلى السطر التالي إذا لم يكن هناك مساحة كافية */
+          padding: 10px 20px;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          /* background-color: rgba(0, 0, 0, 0.88); */
+          transition: background-color 0.3s ease;
+        }
+
+        .site-menu-content__wrap.scrolled {
+          background-color: rgba(0, 0, 0, 0.88); /* لون الخلفية عند التمرير */
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.117647); /* إضافة ظل */
+        }
+
+        .site-branding {
+          flex: 1; /* يسمح للشعار بأخذ المساحة المتبقية */
+          min-width: 150px; /* الحد الأدنى لعرض الشعار */
+        }
+
+        .main-navigation {
+          flex: 2; /* يسمح للروابط بأخذ مساحة أكبر */
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        .main-navigation .menu {
+          display: flex;
+          flex-wrap: wrap; /* يسمح للروابط بالانتقال إلى السطر التالي إذا لم يكن هناك مساحة كافية */
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        .main-navigation .menu > li {
+          margin-left: 20px; /* المسافة بين الروابط */
+        }
+      }
+
+      .site-menu-content {
+        max-height: 110px !important;
+      }
+
+      .site-branding,
+      .open-nav-btn {
+        margin-top: -30px !important;
+      }
+
+      @media screen and (max-width: 767px) {
+        .main-navigation {
+          width: 100%; /* يجعل القائمة تأخذ العرض الكامل */
+          justify-content: flex-end; /* محاذاة الروابط إلى اليسار */
+        }
+
+        .main-navigation .menu {
+          flex-direction: column; /* يجعل الروابط تترتب عموديًا */
+        }
+
+        .main-navigation .menu > li {
+          margin-left: 0; /* إزالة المسافة بين الروابط في الشاشات الصغيرة */
+          margin-bottom: 10px; /* إضافة مسافة بين الروابط */
+        }
+        .site-menu-content {
+          height: 110px !important;
+        }
+        .site-branding,
+        .open-nav-btn {
+          margin-top: -60px !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="main numbered">
+    <div class="site-menu-content">
+      <div class="container-full padding-0">
+        <div
+          class="site-menu-content__wrap wrapper d-flex justify-content-between"
+        >
+          <div class="site-branding">
+            <a href="https://neoscal.com/" class="navbar-brand" rel="home"
+              ><img
+                width="100"
+                height="100"
+                src="https://neoscal.com/wp-content/uploads/2024/09/New-Project.png"
+                class="custom-logo"
+                alt="NeoS Cal"
+                decoding="async"
+            /></a>
+          </div>
+
+          <!-- Nav Menu -->
+          <nav id="site-navigation" class="main-navigation">
+            <button
+              type="button"
+              id="hamburger-menu"
+              class="open-nav-btn"
+              aria-label="open navigation"
+              aria-controls="primary-menu"
+              aria-expanded="false"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+            <div id="slide-nav" class="slide-content navbar-collapse">
+              <button
+                type="button"
+                id="close"
+                class="close-btn"
+                aria-label="close navigation"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+              <span class="screen-reader-text">Primary Menu</span>
+              <span class="main-navigation__icon">
+                <span class="main-navigation__icon__middle"></span>
+              </span>
+              <div class="primary-menu-container">
+                <ul id="primary-menu" class="menu">
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-34"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-34 nav-item"
+                  >
+                    <a href="https://neoscal.com/">Home</a>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-51"
+                    class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-51 nav-item"
+                  >
+                    <a
+                      href="https://neoscal.com/neonatologist/"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      id="menu-item-dropdown-51"
+                      >Neonatologist</a
+                    ><button
+                      type="button"
+                      class="menu-button menu-arrow-button"
+                    >
+                      <span
+                        class="screen-reader-text menu-arrow-button-show"
+                        aria-hidden="false"
+                        >Show Neonatologist submenu</span
+                      ><span
+                        aria-hidden="true"
+                        class="screen-reader-text menu-arrow-button-hide"
+                        >Hide Neonatologist submenu</span
+                      ><i class="sub-menu-arrow" aria-hidden="true"
+                        ><i class="fas fa-angle-down"></i
+                      ></i>
+                    </button>
+                    <ul class="sub-menu" style="opacity: 1 !important">
+                      <li
+                        itemscope="itemscope"
+                        itemtype="https://www.schema.org/SiteNavigationElement"
+                        id="menu-item-1090"
+                        class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1086 current_page_item menu-item-1090 nav-item"
+                      >
+                        <a href="https://neoscal.com/neos-books/" tabindex="-1"
+                          >NEOs Books</a
+                        >
+                      </li>
+                      <li
+                        itemscope="itemscope"
+                        itemtype="https://www.schema.org/SiteNavigationElement"
+                        id="menu-item-1170"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1170 nav-item"
+                      >
+                        <a
+                          href="https://neoscal.com/neonatologist-calculators/"
+                          tabindex="-1"
+                          >NEONATOLOGIST CALCULATORS</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-49"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49 nav-item"
+                  >
+                    <a href="https://neoscal.com/pharmacists/">Pharmacists</a>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-350"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-350 nav-item"
+                  >
+                    <a
+                      href="https://neoscal.com/respiratory-therapists/"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      id="menu-item-dropdown-350"
+                      >Respiratory Therapists</a
+                    ><button
+                      type="button"
+                      class="menu-button menu-arrow-button"
+                    >
+                      <span
+                        class="screen-reader-text menu-arrow-button-show"
+                        aria-hidden="false"
+                        >Show Respiratory Therapists submenu</span
+                      ><span
+                        aria-hidden="true"
+                        class="screen-reader-text menu-arrow-button-hide"
+                        >Hide Respiratory Therapists submenu</span
+                      ><i class="sub-menu-arrow" aria-hidden="true"
+                        ><i class="fas fa-angle-down"></i
+                      ></i>
+                    </button>
+                    <ul class="sub-menu">
+                      <li
+                        itemscope="itemscope"
+                        itemtype="https://www.schema.org/SiteNavigationElement"
+                        id="menu-item-1172"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1172 nav-item"
+                      >
+                        <a
+                          href="https://neoscal.com/respiratory-therapist/"
+                          tabindex="-1"
+                          >Respiratory Calculators for Pediatrics and Neonate</a
+                        >
+                      </li>
+                      <li
+                        itemscope="itemscope"
+                        itemtype="https://www.schema.org/SiteNavigationElement"
+                        id="menu-item-1173"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1173 nav-item"
+                      >
+                        <a
+                          href="https://neoscal.com/respiratory-glossary/"
+                          tabindex="-1"
+                          >Respiratory Glossary</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-273"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-273 nav-item"
+                  >
+                    <a href="https://neoscal.com/forum-2/">Forum</a>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-307"
+                    class="xoo-el-login-tgr menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-307 nav-item"
+                  >
+                    <a
+                      href="#"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      id="menu-item-dropdown-307"
+                      >Login</a
+                    ><button
+                      type="button"
+                      class="menu-button menu-arrow-button"
+                    >
+                      <span
+                        class="screen-reader-text menu-arrow-button-show"
+                        aria-hidden="false"
+                        >Show Login submenu</span
+                      ><span
+                        aria-hidden="true"
+                        class="screen-reader-text menu-arrow-button-hide"
+                        >Hide Login submenu</span
+                      ><i class="sub-menu-arrow" aria-hidden="true"
+                        ><i class="fas fa-angle-down"></i
+                      ></i>
+                    </button>
+                    <ul class="sub-menu">
+                      <li
+                        itemscope="itemscope"
+                        itemtype="https://www.schema.org/SiteNavigationElement"
+                        id="menu-item-309"
+                        class="xoo-el-lostpw-tgr menu-item menu-item-type-custom menu-item-object-custom menu-item-309 nav-item"
+                      >
+                        <a href="#" tabindex="-1">Lost Password</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-357"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-357 nav-item"
+                  >
+                    <a href="https://neoscal.com/contact-us/">Contact us</a>
+                  </li>
+                  <li
+                    itemscope="itemscope"
+                    itemtype="https://www.schema.org/SiteNavigationElement"
+                    id="menu-item-1174"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1174 nav-item"
+                  >
+                    <a href="https://neoscal.com/respiratory-therapists/"
+                      >Respiratory Therapists</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- Nav Menu -->
+        </div>
+      </div>
+    </div>
+
+    <div class="background mb-4"></div>
+
+    <div style="display: flex; justify-content: center">
+      <div class="container mb-5" style="margin-top: 0px !important">
+        <div class="row">
+          <div class="col-12 col-md-9 col-lg-8 mx-auto">
+            <p
+              class="upper_text"
+              style="
+                font-weight: 600;
+                background-color: #17a2b8;
+                border-radius: 5px;
+                padding: 5px 0;
+                text-align: center;
+                margin: auto;
+                margin-bottom: 15px;
+                color: #000;
+              "
+            >
+              Electrolyte Correction Calculator
+            </p>
+
+            <table
+              class="table table-bordered section"
+              style="margin: auto !important"
+            >
+              <tbody>
+                <tr>
+                  <td class="bg-light">intended electrolyte</td>
+                  <td class="bg-light">
+                    <select
+                      class="bg-light B1"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    >
+                      <option value="">Choose a value</option>
+                      <option value="Potassium_Deficit">
+                        Potassium Deficit
+                      </option>
+                      <option value="Sodium_Deficit">
+                        Sodium Deficit
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr style="height: 20px"></tr>
+
+                <tr style="height: 32px">
+                  <td
+                    class="bg-light B5"
+                    style="font-weight: 600; color: red"
+                  ></td>
+
+                  <td class="bg-light">
+                    <input
+                      class="C5"
+                      type="text"
+                      placeholder="Enter a value"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    />
+                  </td>
+                </tr>
+
+                <tr style="height: 32px">
+                  <td
+                    class="bg-light B6"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                  <td class="bg-light">
+                    <input
+                      class="C6"
+                      type="text"
+                      placeholder="Enter a value"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    />
+                  </td>
+                </tr>
+
+                <tr style="height: 32px">
+                  <td
+                    class="bg-light B7"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                  <td class="bg-light">
+                    <input
+                      class="C7"
+                      type="text"
+                      placeholder="Enter a value"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    />
+                  </td>
+                </tr>
+
+                <tr style="height: 32px">
+                  <td
+                    class="bg-light B8"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                  <td
+                    class="bg-light C8"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                </tr>
+
+                <!-- <tr>
+                  <td class="bg-light">Diagnosis for intended procedure</td>
+                  <td class="bg-light">
+                    <select
+                      class="bg-light Diagnosis"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    >
+                      <option value="Diagnosis">Choose a diagnosis</option>
+                      <option value="Clinical">Clinical polycythemia</option>
+                      <option value="Hyperbilirubemia">Hyperbilirubemia</option>
+                    </select>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td class="bg-light">
+                    Treatment ( Intended Type of Exchange Transfusion )
+                  </td>
+                  <td
+                    class="bg-light Treatment"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td class="bg-light">
+                    Facility recommendation for Neonatal Body Blood Volume
+                    (ml/Kg)
+                  </td>
+                  <td class="bg-light">
+                    <select
+                      class="bg-light Facility"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    >
+                      <option value="">Choose a value</option>
+                      <option value="80">80</option>
+                      <option value="85">85</option>
+                      <option value="90">90</option>
+                    </select>
+                  </td>
+                </tr> -->
+
+                <!-- <tr class="B15_parent">
+                  <td class="bg-light">Current Hematocrit (Hct)</td>
+                  <td class="bg-light">
+                    <input
+                      class="Current"
+                      type="text"
+                      placeholder="Enter a value"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    />
+                  </td>
+                </tr> -->
+
+                <!-- <tr class="B17_parent">
+                  <td class="bg-light">Desired Hematocrit (Hct)</td>
+                  <td class="bg-light">
+                    <select
+                      class="bg-light Desired"
+                      style="
+                        border: 1px solid #8b8b8b;
+                        border-radius: 5px;
+                        margin: 3px 0;
+                        padding-left: 5px;
+                      "
+                    >
+                      <option value="">Choose a value</option>
+                      <option value="50">50</option>
+                      <option value="55">55</option>
+                      <option value="60">60</option>
+                      <option value="65">65</option>
+                    </select>
+                  </td>
+                </tr> -->
+                <!-- <tr class="B22_parent" style="height: 30px">
+                  <td class="bg-light">
+                    Aliquots to be removed/Infused over 5 minutes:
+                  </td>
+                  <td
+                    class="bg-light Aliquots"
+                    style="font-weight: 600; color: red"
+                  ></td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-light" style="position: relative; min-height: 300px">
+      <div class="container site-footer">
+        <div class="row">
+          <div class="col-md-4">
+            <aside
+              class="widget widget_text wow animate fadeInUp"
+              data-wow-delay=".3s"
+            >
+              <div class="">
+                <h4 class="widget-title">Quick contact info</h4>
+                <span></span>
+              </div>
+              <div class="textwidget">
+                <p>
+                  <font style="vertical-align: inherit">
+                    <font style="vertical-align: inherit">
+                      We are happy to improve our website based on your
+                      suggestions and update ourselves to meet the standards
+                      expected from us.
+                    </font>
+                    <font style="vertical-align: inherit">
+                      Please, do not hesitate to contact us for any suggestions
+                      or inquiry.
+                    </font>
+                  </font>
+                </p>
+                <address class="text-light">
+                  <i
+                    class="fa-solid fa-location-dot me-2"
+                    style="font-size: 20px"
+                  ></i
+                  >C2XP+CW3 Hafar Al Batin, KSA<br />
+                  <i
+                    class="fa-regular fa-envelope me-2"
+                    style="font-size: 20px"
+                  ></i>
+                  <a class="text-light" href="mailto:neos.cal.inst@gmail.com"
+                    >neos.cal.inst@gmail.com</a
+                  ><br />
+                  <i class="fa fa-phone me-2" style="font-size: 18px"></i>
+                  <a class="text-light" href="tel:+(966) 557878279"
+                    >+(966) 557878279</a
+                  >
+                </address>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-12 col-sm-12 col-xs-12"
+        style="position: absolute; bottom: 0; width: 100%"
+      >
+        <div class="site-info text-center">
+          Copyright © 2024 | Powered by | NeosCal
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // فتح وإغلاق القائمة الجانبية
+        const hamburgerMenu = document.getElementById("hamburger-menu");
+        const closeBtn = document.getElementById("close");
+        const slideNav = document.getElementById("slide-nav");
+
+        hamburgerMenu.addEventListener("click", function () {
+          slideNav.classList.add("active");
+        });
+
+        closeBtn.addEventListener("click", function () {
+          slideNav.classList.remove("active");
+        });
+
+        // فتح وإغلاق القوائم الفرعية
+        const menuArrows = document.querySelectorAll(".menu-arrow-button");
+
+        menuArrows.forEach((arrow) => {
+          arrow.addEventListener("click", function () {
+            const subMenu = this.nextElementSibling; // القائمة الفرعية التالية للسهم
+            subMenu.classList.toggle("sub-menu--open"); // إضافة أو إزالة الكلاس sub-menu--open
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const header = document.querySelector(".site-menu-content");
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 150) {
+            // إذا كان التمرير أكثر من 50 بكسل
+            header.classList.add("scrolled");
+          } else {
+            // إذا كان التمرير أقل من 50 بكسل
+            header.classList.remove("scrolled");
+          }
+        });
+      });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  </body>
+</html>
